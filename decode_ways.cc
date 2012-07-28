@@ -25,19 +25,21 @@
  * So if you are at i, you want to know A[i], and there are two PACMANs have solved A[i-1] and
  * A[i-2]. The only thing you need to do is how to use A[i-1] and A[i-2] to calculate A[i].
  * Here it is.
+
  * Let v = S[i-1] * 10 + S[i]
  *
  *          /   0,               v = 0 or ( 27 < v < 99 and v mod 10 = 0) 
  *         /
  * A[i] = -     A[i-1],          1 < v < 9 or (27 < v < 99 and v mod 10 <> 0)            
- *         \  
+ *         \
  *          \   A[i-2],          v = 10 or v = 20
  *           \
  *            \ A[i-1] + A[i-2], otherwise
  *
  * 
- * Note: this is only good for A[2..N], if A is 0 index. So we need to give answer for A[0] and A[1]
- * So now we know how to solve this problem. Enjoy it.
+ * Note: this is only good for A[2..N], where A is 0 index. So we need to give answer for A[0] and A[1]
+ * So now we know how to solve this problem. The algorithm below has \Theta(n) time complexity and \Theta(n) 
+ * in space.Enjoy it.
  */
 
 
@@ -65,3 +67,13 @@ public:
         return A[length-1];
     }
 };
+
+/* 
+ * Further optimization:
+ *
+ * Notice that calculating A[i] only depend on A[i-1] and A[i-2] , so we can just need to have two variables,
+ * and update them after each iteration. This can reduce the space complexity to \Theta(1).
+ * Here it is:
+ */
+
+
