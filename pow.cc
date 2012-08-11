@@ -10,6 +10,9 @@ public:
     double pow(double x, int n) {
         double m;
         if (n < 0) {
+            if (n == INT_MIN) {
+                return 1 / (x * pow(x, -(n+1)));
+            }
             return 1 / pow(x, -n);
         }
         if (n == 0) {
