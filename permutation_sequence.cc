@@ -24,7 +24,7 @@ public:
         }
         k--;
         int p = 0;
-        int f = fact(n-1-p);
+        int f = fact(n-1);
         while (k != 0) {
             int r;
             int i = k / f;
