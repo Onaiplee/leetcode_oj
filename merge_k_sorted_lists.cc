@@ -18,16 +18,16 @@ class Solution {
 public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
         int min = INT_MAX;
-        int index;
+        int index = -1;
         for (int i = 0; i < lists.size(); i++) {
             if (lists[i]) {
-                if (lists[i]->val < min) {
+                if (lists[i]->val <= min) {
                     min = lists[i]->val;
                     index = i;
                 }
             }
         }
-        if (min == INT_MAX) {
+        if (index == -1) {
             return NULL;
         }
         ListNode *current = lists[index];
