@@ -22,7 +22,7 @@
  */
 
 /**
- * I will add iterative solution later.
+ * I will add some comments later.
  */
 
 class Solution {
@@ -43,5 +43,31 @@ public:
             buf.push_back(root->val);
             inorder(root->right, buf);
         }
+    }
+};
+
+/**
+ * The following code is the iterative solution.
+ */
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> result;
+        TreeNode *current;
+        stack<TreeNode*> st;
+        current = root;
+        while (current || !st.empty()) {
+            if (current) {
+                st.push(current);
+                current = current->left;
+            }
+            else {
+                result.push_back(st.top()->val);
+                current = st.top()->right;
+                st.pop();
+            }
+        }
+        return result;
     }
 };
