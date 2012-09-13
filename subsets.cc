@@ -40,3 +40,28 @@ public:
     }
     
 };
+
+/**
+ * Here is the dfs solution.
+ */
+
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+        sort(S.begin(), S.end());
+        vector<int> buffer;
+        vector<vector<int> > result;
+        dfs(0, S, result, buffer);
+        result.push_back(buffer);
+        return result;
+    }
+    
+    void dfs(int index, vector<int> &S, vector<vector<int> > &result, vector<int> &buffer) {
+        for (int i = index; i < S.size(); i++) {
+            buffer.push_back(S[i]);
+            result.push_back(buffer);
+            dfs(i+1, S, result, buffer);
+            buffer.pop_back();
+        }
+    }
+};
