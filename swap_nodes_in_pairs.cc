@@ -16,7 +16,8 @@
  */
 
 /**
- * I always like to add a pivot when I do such problems...
+ * I always like to add a pivot when I do such problems iteratively.
+ * I added the recursive solution that is neat.
  */
 
 class Solution {
@@ -39,5 +40,27 @@ public:
         delete pivot;
         pivot = NULL;
         return head;
+    }
+};
+
+/** 
+ *recursive solution
+ */
+
+class Solution {
+public:
+    ListNode *swapPairs(ListNode *head) {
+        ListNode *l;
+        ListNode *r;
+        if (!head || !head->next) {
+            return head;
+        }
+        else {
+            l = head;
+            r = head->next;
+            l->next = swapPairs(r->next);
+            r->next = l;
+            return r;
+        }
     }
 };
