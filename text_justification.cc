@@ -1,3 +1,34 @@
+// Given an array of words and a length L, format the text such that each 
+// line has exactly L characters and is fully (left and right) justified.
+// 
+// You should pack your words in a greedy approach; that is, pack as many 
+// words as you can in each line. Pad extra spaces ' ' when necessary so that 
+// each line has exactly L characters.
+// 
+// Extra spaces between words should be distributed as evenly as possible. 
+// If the number of spaces on a line do not divide evenly between words, the 
+// empty slots on the left will be assigned more spaces than the slots on 
+// the right.
+// 
+// For the last line of text, it should be left justified and no extra space 
+// is inserted between words.
+// 
+// For example,
+// words: ["This", "is", "an", "example", "of", "text", "justification."]
+// L: 16.
+
+// Return the formatted lines as:
+// [
+//    "This    is    an",
+//    "example  of text",
+//    "justification.  "
+// ]
+// Note: Each word is guaranteed not to exceed L in length.
+
+/**
+ * This is the refactored one, original messed up solution has been put
+ * in alternatives/.
+ */
 
 class Solution {
 public:
@@ -15,7 +46,8 @@ public:
             result.push_back(string(L, ' '));
             return result;
         }
-    
+        
+        // Find the next line break position ^_^
         while ( (stop = next_break(u_words, start, L)) != size - 1) {
             string line;
             if (start == stop) {
@@ -23,6 +55,7 @@ public:
                 line = left_justify(u_words, start, stop, L);
             }
             else {
+                // otherwise do left right justification
                 line = lr_justify(u_words, start, stop, L);
             }
             result.push_back(line);
