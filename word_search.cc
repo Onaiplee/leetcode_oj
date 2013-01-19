@@ -29,6 +29,26 @@ using namespace std;
 class Solution {
 public:
     bool exist(vector<vector<char> > &board, string word) {
+        if (board.size() * board[0].size() < word.size()) {
+            return false;
+        }
+        int pool[256];
+        for (int i = 0; i < 256; i++) {
+            pool[i] = 0;
+        }
+        for (int i = 0; i < board.size(); i++) {
+            for (int j = 0; j < board[0].size(); j++) {
+                pool[board[i][j]]++;
+            }
+        }
+        for (int i = 0; i < word.size(); i++) {
+            pool[word[i]]--;
+        }
+        for (int i = 0; i < 256; i++) {
+            if (pool[i] < 0) {
+                return false;
+            }
+        }
         vector<vector<char> > mark = board;
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board[0].size(); j++) {
