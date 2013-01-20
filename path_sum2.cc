@@ -21,34 +21,35 @@
  * };
  */
 
-/*
+/**
  * I will add some comments later.
  */
 
 class Solution {
 public:
-    bool hasPathSum(TreeNode *root, int sum) {
-        return dfs(root, sum, 0);
+    vector<vector<int> > pathSum(TreeNode *root, int sum) {
+        vector<vector<int> > result;
+        vector<int> path;
+        int current = 0;
+        dfs(root, sum, current, path, result);
+        return result;
     }
     
-    bool dfs(TreeNode *root, int sum, int acc) {
+    void dfs(TreeNode *root, int sum, int &current, vector<int> &path, vector<vector<int> > &result) {
         if (!root) {
-            return false;
+            return;
         }
-        acc += root->val;
+        path.push_back(root->val);
+        current += root->val;
         if (!root->left && !root->right) {
-            if (acc == sum) {
-                return true;
+            if (current == sum) {
+                result.push_back(path);
             }
         }
-        bool ret = dfs(root->left, sum, acc);
-        if (ret) {
-            return true;
-        }
-        ret = dfs(root->right, sum, acc);
-        if (ret) {
-            return true;
-        }
-        return false;
+        dfs(root->left, sum, current, path, result);
+        dfs(root->right, sum, current, path, result);
+        path.pop_back();
+        current -= root->val;
+        return;
     }
 };
