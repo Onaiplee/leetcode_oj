@@ -14,9 +14,6 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        if (!root) {
-            return;
-        }
         TreeLinkNode *level_start = root;
         TreeLinkNode *last = NULL;
         while (level_start) {
